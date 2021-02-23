@@ -137,9 +137,40 @@
                     <view key="view" contentMode="scaleToFill" id="DXF-Jn-OSB">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lNQ-7D-kDJ">
+                                <rect key="frame" x="10" y="54" width="394" height="60"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="60" id="TDH-8K-VV0"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="22"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="CRU-fM-UIJ">
+                                <rect key="frame" x="10" y="124" width="394" height="728"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <color key="textColor" systemColor="labelColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="pUo-zn-ca7"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="CRU-fM-UIJ" firstAttribute="top" secondItem="lNQ-7D-kDJ" secondAttribute="bottom" constant="10" id="02X-XB-p0V"/>
+                            <constraint firstItem="lNQ-7D-kDJ" firstAttribute="leading" secondItem="pUo-zn-ca7" secondAttribute="leading" constant="10" id="3Ff-qb-xd4"/>
+                            <constraint firstItem="lNQ-7D-kDJ" firstAttribute="top" secondItem="pUo-zn-ca7" secondAttribute="top" constant="10" id="6VI-jP-Rsg"/>
+                            <constraint firstItem="pUo-zn-ca7" firstAttribute="trailing" secondItem="CRU-fM-UIJ" secondAttribute="trailing" constant="10" id="Owy-dT-AhC"/>
+                            <constraint firstItem="pUo-zn-ca7" firstAttribute="bottom" secondItem="CRU-fM-UIJ" secondAttribute="bottom" constant="10" id="Sf9-Tr-sRT"/>
+                            <constraint firstItem="CRU-fM-UIJ" firstAttribute="leading" secondItem="pUo-zn-ca7" secondAttribute="leading" constant="10" id="qAd-2f-2pQ"/>
+                            <constraint firstItem="pUo-zn-ca7" firstAttribute="trailing" secondItem="lNQ-7D-kDJ" secondAttribute="trailing" constant="10" id="wwn-Ap-3ZR"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="noteLabel" destination="CRU-fM-UIJ" id="A6A-8H-JrM"/>
+                        <outlet property="titleLabel" destination="lNQ-7D-kDJ" id="ZV3-3h-Aj8"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="A92-EG-Pgs" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

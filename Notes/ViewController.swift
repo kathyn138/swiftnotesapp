@@ -30,7 +30,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         
         // runs when we hit save on new note
         vc.completion = { noteTitle, note in
-            // go back to root view controller
+            // dismisses all view controllers except root and updates display
             self.navigationController?.popToRootViewController(animated: true)
             // add to list of notes
             self.models.append((title: noteTitle, note: note))
@@ -59,11 +59,17 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         
+        // select row
+        let model = models[indexPath.row]
+        
         // show Note controller
         guard let vc = storyboard?.instantiateViewController(identifier: "note") as? NoteViewController else {
             return
         }
+        vc.navigationItem.largeTitleDisplayMode = .never
         vc.title = "Note"
+        vc.noteTitle = model.title
+        vc.note = model.note 
         navigationController?.pushViewController(vc, animated: true)
     }
 }

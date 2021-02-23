@@ -8,22 +8,25 @@
 import UIKit
 
 class NewNoteViewController: UIViewController {
-
+    @IBOutlet var titleField: UITextField!
+    @IBOutlet var noteField: UITextView!
+    
+    // used to get data from this controller
+    public var completion: ((String, String) -> Void)?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        titleField.becomeFirstResponder()
+        
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Save", style: .done, target: self, action: #selector(didTapSave))
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    @objc func didTapSave() {
+        // if there is text and text isn't empty
+        if let text = titleField.text, !text.isEmpty, !noteField.text.isEmpty {
+            completion?(text, noteField.text)
+        }
     }
-    */
+    
 
 }

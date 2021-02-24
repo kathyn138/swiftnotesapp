@@ -7,6 +7,7 @@
 
 import UIKit
 
+
 class NoteViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet var titleLabel : UILabel!
     @IBOutlet var editableTitleLabel: UITextField!
@@ -44,6 +45,7 @@ class NoteViewController: UIViewController, UITextFieldDelegate {
         if let text = titleLabel.text, !text.isEmpty, !noteField.text.isEmpty {
             completion?(text, noteField.text)
         }
+        self.navigationController?.popToRootViewController(animated: true)
     }
 
 }

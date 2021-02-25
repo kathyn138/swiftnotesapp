@@ -25,7 +25,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             return
         }
         vc.title = "New Note"
-        // ?
         vc.navigationItem.largeTitleDisplayMode = .never
         
         // runs when we hit save on new note
@@ -43,8 +42,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         navigationController?.pushViewController(vc, animated: true)
     }
     
-    // how many rows to display?
-    // crosscheck with other one
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return models.count
     }

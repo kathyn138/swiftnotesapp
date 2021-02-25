@@ -15,6 +15,7 @@
 		D33253D625E47B2300A8FEB2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D33253D425E47B2300A8FEB2 /* LaunchScreen.storyboard */; };
 		D33253DF25E47B6D00A8FEB2 /* NoteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D33253DE25E47B6D00A8FEB2 /* NoteViewController.swift */; };
 		D33253E225E47B8F00A8FEB2 /* NewNoteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D33253E125E47B8F00A8FEB2 /* NewNoteViewController.swift */; };
+		D36F474625E71E2400A96EF3 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D36F474525E71E2400A96EF3 /* GoogleService-Info.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +29,7 @@
 		D33253D725E47B2300A8FEB2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D33253DE25E47B6D00A8FEB2 /* NoteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteViewController.swift; sourceTree = "<group>"; };
 		D33253E125E47B8F00A8FEB2 /* NewNoteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewNoteViewController.swift; sourceTree = "<group>"; };
+		D36F474525E71E2400A96EF3 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "GoogleService-Info.plist"; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -69,6 +71,7 @@
 				D33253D425E47B2300A8FEB2 /* LaunchScreen.storyboard */,
 				D33253D725E47B2300A8FEB2 /* Info.plist */,
 				D33253DE25E47B6D00A8FEB2 /* NoteViewController.swift */,
+				D36F474525E71E2400A96EF3 /* GoogleService-Info.plist */,
 			);
 			path = Notes;
 			sourceTree = "<group>";
@@ -131,6 +134,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D33253D625E47B2300A8FEB2 /* LaunchScreen.storyboard in Resources */,
+				D36F474625E71E2400A96EF3 /* GoogleService-Info.plist in Resources */,
 				D33253D325E47B2300A8FEB2 /* Assets.xcassets in Resources */,
 				D33253D125E47B2300A8FEB2 /* Main.storyboard in Resources */,
 			);

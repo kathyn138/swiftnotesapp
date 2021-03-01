@@ -8,8 +8,8 @@
 import UIKit
 
 class NewNoteViewController: UIViewController {
-    @IBOutlet var titleField: UITextField!
-    @IBOutlet var noteField: UITextView!
+    @IBOutlet weak private var titleField: UITextField!
+    @IBOutlet weak private var noteField: UITextView!
     
     // used to get data from this controller
     public var completion: ((String, String) -> Void)?

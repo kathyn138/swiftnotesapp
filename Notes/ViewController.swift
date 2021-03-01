@@ -9,8 +9,8 @@ import UIKit
 
 class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
-    @IBOutlet var table: UITableView!
-    @IBOutlet var label: UILabel!
+    @IBOutlet weak private var table: UITableView!
+    @IBOutlet weak private var label: UILabel!
     
     var models: [(title: String, note: String)] = []
     override func viewDidLoad() {

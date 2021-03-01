@@ -9,9 +9,9 @@ import UIKit
 
 
 class NoteViewController: UIViewController, UITextFieldDelegate {
-    @IBOutlet var titleLabel : UILabel!
-    @IBOutlet var editableTitleLabel: UITextField!
-    @IBOutlet var noteField: UITextView!
+    @IBOutlet weak private var titleLabel : UILabel!
+    @IBOutlet weak private var editableTitleLabel: UITextField!
+    @IBOutlet weak private var noteField: UITextView!
     
     // need to give these default values or will get "no initializers" error
     public var noteTitle: String = ""

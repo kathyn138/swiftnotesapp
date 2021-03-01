@@ -12,7 +12,13 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     @IBOutlet weak private var table: UITableView!
     @IBOutlet weak private var label: UILabel!
     
-    var models: [(title: String, note: String)] = []
+    struct Note {
+        var title: String
+        var note: String
+    }
+
+    var models: [Note] = []
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         table.delegate = self
@@ -32,7 +38,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             // dismisses all view controllers except root and updates display
             self.navigationController?.popToRootViewController(animated: true)
             // add to list of notes
-            self.models.append((title: noteTitle, note: note))
+            self.models.append(Note(title: noteTitle, note: note))
             // hide label bc now have notes
             self.label.isHidden = true
             // unhide table bc now have notes

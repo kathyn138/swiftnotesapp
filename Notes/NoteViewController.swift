@@ -14,8 +14,13 @@ class NoteViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak private var noteField: UITextView!
     
     // need to give these default values or will get "no initializers" error
-    public var noteTitle: String = ""
-    public var note: String = ""
+    class Note {
+        var noteTitle: String = ""
+        var note: String = ""
+    }
+    private var currNote = Note()
+//    public var noteTitle: String = ""
+//    public var note: String = ""
     public var completion: ((String, String) -> Void)?
     
     override func viewDidLoad() {
@@ -27,8 +32,8 @@ class NoteViewController: UIViewController, UITextFieldDelegate {
         tapGesture.numberOfTapsRequired = 1
         titleLabel.addGestureRecognizer(tapGesture)
         
-        titleLabel.text = noteTitle
-        noteField.text = note
+        titleLabel.text = currNote.noteTitle
+        noteField.text = currNote.note
         
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Save", style: .done, target: self, action: #selector(didTapSave))
     }

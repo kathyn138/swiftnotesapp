@@ -12,7 +12,8 @@ class NewNoteViewController: UIViewController {
     @IBOutlet weak private var noteField: UITextView!
     
     // used to get data from this controller
-    public var completion: ((String, String) -> Void)?
+    typealias CompletionHandler = ((String, String) -> Void)?
+//    public var completion: ((String, String) -> Void)?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,12 +23,11 @@ class NewNoteViewController: UIViewController {
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Save", style: .done, target: self, action: #selector(didTapSave))
     }
     
-    @objc func didTapSave() {
+    @objc func didTapSave(completion: CompletionHandler) {
         // if there is text and text isn't empty
         if let text = titleField.text, !text.isEmpty, !noteField.text.isEmpty {
+//            completion?(text, noteField.text)
             completion?(text, noteField.text)
         }
     }
-    
-
 }

@@ -75,7 +75,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
 //        guard let vc = storyboard?.instantiateViewController(identifier: "note") as? NoteViewController else {
 //            return
 //        }
-////        vc.navigationItem.largeTitleDisplayMode = .never
 //        vc.title = "Note"
 //        vc.noteTitle = model.title
 //        vc.note = model.note

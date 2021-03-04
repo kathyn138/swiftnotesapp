@@ -25,6 +25,7 @@ class NoteViewController: UIViewController, UITextFieldDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.navigationItem.largeTitleDisplayMode = .never
         
         editableTitleLabel.delegate = self
         titleLabel.isUserInteractionEnabled = true

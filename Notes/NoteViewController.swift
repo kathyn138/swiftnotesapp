@@ -30,16 +30,10 @@ class NoteViewController: UIViewController, UITextFieldDelegate {
         navigationItem.largeTitleDisplayMode = .never
         title = "Note"
         
-        editableTitleLabel.delegate = self
-        titleLabel.isUserInteractionEnabled = true
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(labelTapped))
-        tapGesture.numberOfTapsRequired = 1
-        titleLabel.addGestureRecognizer(tapGesture)
-        
         titleLabel.text = currNote.noteTitle
         noteField.text = currNote.note
         
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Save", style: .done, target: self, action: #selector(didTapSave))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Edit", style: .done, target: self, action: #selector(labelTapped))
     }
     
     @objc func labelTapped() {
@@ -47,6 +41,10 @@ class NoteViewController: UIViewController, UITextFieldDelegate {
         editableTitleLabel.isHidden = false
         editableTitleLabel.text = titleLabel.text
         editableTitleLabel.becomeFirstResponder()
+        
+        noteField.isEditable = true
+        
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Save", style: .done, target: self, action: #selector(didTapSave))
     }
     
     @objc func didTapSave() {

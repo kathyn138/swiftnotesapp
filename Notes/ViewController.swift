@@ -18,7 +18,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     var models: [Note] = []
     
-    func makeNewNote(_ title: String, _ note: String) {
+    func makeNewNote(title: String, note: String) {
         self.navigationController?.popToRootViewController(animated: true)
         // add to list of notes
         self.models.append(Note(title: title, note: note))

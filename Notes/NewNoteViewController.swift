@@ -8,7 +8,7 @@
 import UIKit
 
 protocol NewNoteDelegate: class {
-    func makeNewNote (_ title: String, _ note: String) -> Void
+    func makeNewNote (title: String, note: String) -> Void
 }
 
 class NewNoteViewController: UIViewController {
@@ -27,8 +27,8 @@ class NewNoteViewController: UIViewController {
     
     @objc func didTapSave() {
         // if there is text and text isn't empty
-        if let text = titleField?.text, !text.isEmpty, !noteField.text.isEmpty {
-            delegate?.makeNewNote(text, noteField.text)
+        if let title = titleField?.text, !title.isEmpty, !noteField.text.isEmpty {
+            delegate?.makeNewNote(title: title, note: noteField.text)
         }
     }
 }

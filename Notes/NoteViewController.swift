@@ -7,10 +7,15 @@
 
 import UIKit
 
+protocol NoteDelegate: class {
+    func editNote (title: String, note: String) -> Void
+}
+
 class NoteViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak private var titleLabel : UILabel!
     @IBOutlet weak private var editableTitleLabel: UITextField!
     @IBOutlet weak private var noteField: UITextView!
+    weak var delegate: NoteDelegate?
     
     // need to give these default values or will get "no initializers" error
     class Note {
@@ -20,7 +25,7 @@ class NoteViewController: UIViewController, UITextFieldDelegate {
     
     var currNote = Note()
 
-    public var completion: ((String, String) -> Void)?
+//    public var completion: ((String, String) -> Void)?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -48,9 +53,9 @@ class NoteViewController: UIViewController, UITextFieldDelegate {
     
     @objc func didTapSave() {
         // if there is text and text isn't empty
-        if let text = titleLabel.text, !text.isEmpty, !noteField.text.isEmpty {
-            completion?(text, noteField.text)
-            self.navigationController?.popToRootViewController(animated: true)
+        if let title = titleLabel.text, !title.isEmpty, !noteField.text.isEmpty {
+            delegate?.editNote(title: title, note: noteField.text)
+//            self.navigationController?.popToRootViewController(animated: true)
         }
     }
 

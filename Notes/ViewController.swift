@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, NewNoteDelegate {
+class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, NewNoteDelegate, NoteDelegate {
     @IBOutlet weak private var table: UITableView!
     @IBOutlet weak private var label: UILabel!
     
@@ -28,6 +28,11 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         self.table.isHidden = false
         self.table.reloadData()
     }
+    
+    func editNote(title: String, note: String) {
+        self.navigationController?.popToRootViewController(animated: true)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         table.delegate = self
@@ -55,20 +60,21 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         return cell
     }
     
-//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        tableView.deselectRow(at: indexPath, animated: true)
-//
-//        // select row
-//        let model = models[indexPath.row]
-//
-//        // show Note controller
-//        guard let vc = storyboard?.instantiateViewController(identifier: "note") as? NoteViewController else {
-//            return
-//        }
-//        vc.title = "Note"
-//        vc.noteTitle = model.title
-//        vc.note = model.note
-//        navigationController?.pushViewController(vc, animated: true)
-//    }
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+
+        // select row
+        let model = models[indexPath.row]
+
+        // show Note controller
+        guard let vc = storyboard?.instantiateViewController(identifier: "note") as? NoteViewController else {
+            return
+        }
+        
+        vc.delegate = self
+        vc.currNote.noteTitle = model.title
+        vc.currNote.note = model.note
+        navigationController?.pushViewController(vc, animated: true)
+    }
 }
 

@@ -8,11 +8,6 @@
 import UIKit
 
 class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, NewNoteDelegate {
-    func makeNewNote(title: String, note: String) {
-        self.navigationController?.popToRootViewController(animated: true)
-    }
-    
-    
     @IBOutlet weak private var table: UITableView!
     @IBOutlet weak private var label: UILabel!
     
@@ -23,6 +18,16 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     var models: [Note] = []
     
+    func makeNewNote(_ title: String, _ note: String) {
+        self.navigationController?.popToRootViewController(animated: true)
+        // add to list of notes
+        self.models.append(Note(title: title, note: note))
+        //  hide label bc now have notes
+        self.label.isHidden = true
+        // unhide table bc now have notes
+        self.table.isHidden = false
+        self.table.reloadData()
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         table.delegate = self
@@ -36,21 +41,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         }
         
         vc.delegate = self
-        
-        makeNewNote(title: "ok", note: "ok")
-        // runs when we hit save on new note
-//        vc.didTapSave(completion: { (noteTitle, note) in
-//            self.navigationController?.popToRootViewController(animated: true)
-//            // add to list of notes
-//            self.models.append(Note(title: noteTitle, note: note))
-//            // hide label bc now have notes
-//            self.label.isHidden = true
-////            // unhide table bc now have notes
-//            self.table.isHidden = false
-//            self.table.reloadData()
-//
-//        })
-
         navigationController?.pushViewController(vc, animated: true)
     }
     

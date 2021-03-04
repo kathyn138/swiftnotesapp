@@ -24,8 +24,6 @@ class NoteViewController: UIViewController, UITextFieldDelegate {
     }
     
     var currNote = Note()
-
-//    public var completion: ((String, String) -> Void)?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -55,7 +53,6 @@ class NoteViewController: UIViewController, UITextFieldDelegate {
         // if there is text and text isn't empty
         if let title = titleLabel.text, !title.isEmpty, !noteField.text.isEmpty {
             delegate?.editNote(title: title, note: noteField.text)
-//            self.navigationController?.popToRootViewController(animated: true)
         }
     }
 

@@ -7,7 +7,11 @@
 
 import UIKit
 
-class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, NewNoteDelegate {
+    func makeNewNote(title: String, note: String) {
+        self.navigationController?.popToRootViewController(animated: true)
+    }
+    
     
     @IBOutlet weak private var table: UITableView!
     @IBOutlet weak private var label: UILabel!
@@ -16,7 +20,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         var title: String
         var note: String
     }
-
+    
     var models: [Note] = []
     
     override func viewDidLoad() {
@@ -25,26 +29,28 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         table.dataSource = self
         title = "Notes"
     }
-
-    @IBAction func didTapNewNote() {
+    
+     @IBAction func didTapNewNote() {
         guard let vc = storyboard?.instantiateViewController(identifier: "new") as? NewNoteViewController else {
             return
         }
-        vc.title = "New Note"
-        vc.navigationItem.largeTitleDisplayMode = .never
         
+        vc.delegate = self
+        
+        makeNewNote(title: "ok", note: "ok")
         // runs when we hit save on new note
-        vc.completion = { noteTitle, note in
-            // dismisses all view controllers except root and updates display
-            self.navigationController?.popToRootViewController(animated: true)
-            // add to list of notes
-            self.models.append(Note(title: noteTitle, note: note))
-            // hide label bc now have notes
-            self.label.isHidden = true
-            // unhide table bc now have notes
-            self.table.isHidden = false
-            self.table.reloadData()
-        }
+//        vc.didTapSave(completion: { (noteTitle, note) in
+//            self.navigationController?.popToRootViewController(animated: true)
+//            // add to list of notes
+//            self.models.append(Note(title: noteTitle, note: note))
+//            // hide label bc now have notes
+//            self.label.isHidden = true
+////            // unhide table bc now have notes
+//            self.table.isHidden = false
+//            self.table.reloadData()
+//
+//        })
+
         navigationController?.pushViewController(vc, animated: true)
     }
     
@@ -59,21 +65,21 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         return cell
     }
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: true)
-        
-        // select row
-        let model = models[indexPath.row]
-        
-        // show Note controller
-        guard let vc = storyboard?.instantiateViewController(identifier: "note") as? NoteViewController else {
-            return
-        }
-        vc.navigationItem.largeTitleDisplayMode = .never
-        vc.title = "Note"
-        vc.noteTitle = model.title
-        vc.note = model.note 
-        navigationController?.pushViewController(vc, animated: true)
-    }
+//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+//        tableView.deselectRow(at: indexPath, animated: true)
+//
+//        // select row
+//        let model = models[indexPath.row]
+//
+//        // show Note controller
+//        guard let vc = storyboard?.instantiateViewController(identifier: "note") as? NoteViewController else {
+//            return
+//        }
+////        vc.navigationItem.largeTitleDisplayMode = .never
+//        vc.title = "Note"
+//        vc.noteTitle = model.title
+//        vc.note = model.note
+//        navigationController?.pushViewController(vc, animated: true)
+//    }
 }
 

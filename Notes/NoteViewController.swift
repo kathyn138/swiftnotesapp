@@ -7,7 +7,6 @@
 
 import UIKit
 
-
 class NoteViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak private var titleLabel : UILabel!
     @IBOutlet weak private var editableTitleLabel: UITextField!
@@ -18,14 +17,15 @@ class NoteViewController: UIViewController, UITextFieldDelegate {
         var noteTitle: String = ""
         var note: String = ""
     }
-    private var currNote = Note()
-//    public var noteTitle: String = ""
-//    public var note: String = ""
+    
+    var currNote = Note()
+
     public var completion: ((String, String) -> Void)?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.navigationItem.largeTitleDisplayMode = .never
+        navigationItem.largeTitleDisplayMode = .never
+        title = "Note"
         
         editableTitleLabel.delegate = self
         titleLabel.isUserInteractionEnabled = true
@@ -50,8 +50,8 @@ class NoteViewController: UIViewController, UITextFieldDelegate {
         // if there is text and text isn't empty
         if let text = titleLabel.text, !text.isEmpty, !noteField.text.isEmpty {
             completion?(text, noteField.text)
+            self.navigationController?.popToRootViewController(animated: true)
         }
-        self.navigationController?.popToRootViewController(animated: true)
     }
 
 }

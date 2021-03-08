@@ -6,14 +6,24 @@
 //
 
 import UIKit
+import Firebase
 
 class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, NewNoteDelegate, NoteDelegate {
     @IBOutlet weak private var table: UITableView!
     @IBOutlet weak private var label: UILabel!
     
+    let ref = Database.database().reference(withPath: "notes")
+
     struct Note {
         var title: String
         var note: String
+        
+        func toAnyObject() -> Any {
+          return [
+            "title": title,
+            "note": note,
+          ]
+        }
     }
     
     var models: [Note] = []
@@ -21,7 +31,10 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     func makeNewNote(title: String, note: String) {
         self.navigationController?.popToRootViewController(animated: true)
         // add to list of notes
-        self.models.append(Note(title: title, note: note))
+        let newNote = Note(title: title, note: note)
+        let newNoteRef = self.ref.child(newNote.title.lowercased())
+        newNoteRef.setValue(newNote.toAnyObject())
+//        self.models.append(Note(title: title, note: note))
         //  hide label bc now have notes
         self.label.isHidden = true
         // unhide table bc now have notes

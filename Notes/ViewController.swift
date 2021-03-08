@@ -15,8 +15,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     let ref = Database.database().reference(withPath: "notes")
 
     struct Note {
-        var title: String
-        var note: String
+        let title: String
+        let note: String
         
         func toAnyObject() -> Any {
           return [
@@ -24,22 +24,34 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             "note": note,
           ]
         }
+        
+        init(title: String, note: String) {
+            self.title = title
+            self.note = note
+        }
+        
+        init?(snapshot: DataSnapshot) {
+          guard
+            let value = snapshot.value as? [String: AnyObject],
+            let title = value["title"] as? String,
+            let note = value["note"] as? String else {
+            return nil
+          }
+          
+          self.title = title
+          self.note = note
+        }
     }
     
     var models: [Note] = []
     
     func makeNewNote(title: String, note: String) {
         self.navigationController?.popToRootViewController(animated: true)
-        // add to list of notes
         let newNote = Note(title: title, note: note)
         let newNoteRef = self.ref.child(newNote.title.lowercased())
+        // setValue accepts a dictionary
+        // add new note to database
         newNoteRef.setValue(newNote.toAnyObject())
-//        self.models.append(Note(title: title, note: note))
-        //  hide label bc now have notes
-        self.label.isHidden = true
-        // unhide table bc now have notes
-        self.table.isHidden = false
-        self.table.reloadData()
     }
     
     func editNote(title: String, note: String) {
@@ -51,6 +63,36 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         table.delegate = self
         table.dataSource = self
         title = "Notes"
+        
+        
+        // listen for change in firebase db
+        // update app with most recent data when changes occur
+        ref.observe(.value, with: { snapshot in
+            // store latest version of data in newNotes
+            var newNotes: [Note] = []
+            
+            // listener's closure returns snapshot of latest set of data
+            // snapshot has entire list of notes
+            for child in snapshot.children {
+                if let snapshot = child as? DataSnapshot,
+                   let note = Note(snapshot: snapshot) {
+                    newNotes.append(note)
+                }
+            }
+            // replace models with latest version of data
+            self.models = newNotes
+            
+            // toggle label and table depending on if there is data
+            if self.models.count > 0 {
+                self.label.isHidden = true
+                self.table.isHidden = false
+            } else {
+                self.label.isHidden = false
+                self.table.isHidden = true
+            }
+            
+            self.table.reloadData()
+        })
     }
     
      @IBAction func didTapNewNote() {
